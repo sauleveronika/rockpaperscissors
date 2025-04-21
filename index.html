@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <!---
+        use alert(`You've picked ${yourPick}, you ${resultMessage})
+        -->
+        <h3>Rock Paper Scissors</h3>
+
+        <button onclick="     
+            comparePicks('Rock');  
+        ">
+            Rock
+        </button>
+
+        <button onclick="
+            comparePicks('Paper')
+        ">
+            Paper
+        </button>
+
+        <button onclick="
+            comparePicks('Scissors')
+        ">
+            Scissors
+        </button>
+
+        <button onclick="
+            /* resetScore()   */
+            localStorage.removeItem('storedScore')   
+        ">
+            Reset the score
+        </button>
+
+
+        <script>
+            /*let score = {
+                win: 0,
+                loose: 0,
+                tie: 0
+            }*/
+
+            function getRandomItem() {
+
+                const arr = ["Rock", "Paper", "Scissors"];
+                let index = Math.floor(Math.random() * arr.length);
+                return arr[index]
+            };
+            
+            function comparePicks(yourPick) {
+                let score = JSON.parse(localStorage.getItem("storedScore")) || {
+                            win: 0,
+                            loose: 0,
+                            tie: 0
+                        }
+                
+
+
+                let computerPick = getRandomItem();
+                let result = "";
+
+                if (yourPick == "Rock"){
+                    if (computerPick == "Paper"){
+                        result = "You've lost!";
+                        score.loose = score.loose + 1;
+                    }
+                    else if (computerPick == "Rock") {
+                        result = "It's a draw.";
+                        score.tie = score.tie + 1;
+                    }     
+                    else{
+                        result = "You've won!";
+                        score.win = score.win + 1;
+                    }   
+                
+                }
+
+                else if(yourPick == "Paper") {
+                    if(computerPick =="Paper"){
+                        result = "It's a draw.";
+                        score.tie = score.tie + 1;
+                    }
+                    else if(computerPick == "Scissors"){
+                        result = "You've lost!";                        
+                        score.loose = score.loose + 1;
+                    }
+                    else{
+                        result = "You've won!";
+                        score.win = score.win + 1;
+                    }
+                                  
+                }
+
+                else{
+                    if (computerPick =="Scissors"){
+                        result = "It's a draw.";
+                        score.tie = score.tie + 1;
+                    }
+                    else if(computerPick == "Rock"){
+                        result = "You've lost!";                        
+                        score.loose = score.loose + 1;
+                    }
+                    else{
+                        result = "You've won!";
+                        score.win = score.win + 1;
+                    } 
+
+                }
+
+                let scoreString = JSON.stringify(score);
+
+                localStorage.setItem("storedScore", scoreString);
+                
+                
+
+                return alert(`Your pick: ${yourPick} \nComputer pick: ${computerPick} \n ${result} \n\nWins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`)
+
+            };
+
+            function resetScore() {
+                for (let key in score) {
+                    score[key] = 0
+                }
+
+                return alert(`Your score has been re-set!\nWins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`)
+            }
+            
+        
+        </script>
+
+    </body>
+
+
+</html>
