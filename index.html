@@ -5,32 +5,75 @@
         <!---
         use alert(`You've picked ${yourPick}, you ${resultMessage})
         -->
+
+        <style>
+            body {
+                font-size: 1.5em;
+                padding: 2%;
+            }
+
+            button {
+                width: 150px;
+                height: 60px;
+
+            }
+
+            .reset-div button{
+                width: 100%;
+                margin-top: 2%;
+            }
+
+            .game-div {
+                display: flex column;
+                width: 470px;
+            }
+        </style>
+
+
+        <h6><a href="6-DOM_Selection_Page.html">Back</a></h6>
+
+
         <h3>Rock Paper Scissors</h3>
 
-        <button onclick="     
-            comparePicks('Rock');  
-        ">
-            Rock
-        </button>
+        <div class = "game-div">
+            <div class = "buttons-div">
+                <button onclick="     
+                    comparePicks('Rock');  
+                ">
+                    Rock
+                </button>
 
-        <button onclick="
-            comparePicks('Paper')
-        ">
-            Paper
-        </button>
+                <button onclick="
+                    comparePicks('Paper')
+                ">
+                    Paper
+                </button>
 
-        <button onclick="
-            comparePicks('Scissors')
-        ">
-            Scissors
-        </button>
+                <button onclick="
+                    comparePicks('Scissors')
+                ">
+                    Scissors
+                </button>
+            </div>
 
-        <button onclick="
-            /* resetScore()   */
-            localStorage.removeItem('storedScore')   
-        ">
-            Reset the score
-        </button>
+            <div class="reset-div">
+                <button onclick="
+                    /* resetScore()   */
+                    localStorage.removeItem('storedScore')   
+                    resetMessage()
+                ">
+                    Reset the score
+                </button>
+            </div>
+
+            <div class = "message-div">
+                <p class = "js-picks"></p>
+                <p class = "js-result"></p>
+                <p class = "js-score">Wins: 0, Losses: 0, Ties: 0</p>
+            </div>
+        </div>
+
+        
 
 
         <script>
@@ -41,7 +84,6 @@
             }*/
 
             function getRandomItem() {
-
                 const arr = ["Rock", "Paper", "Scissors"];
                 let index = Math.floor(Math.random() * arr.length);
                 return arr[index]
@@ -53,8 +95,6 @@
                             loose: 0,
                             tie: 0
                         }
-                
-
 
                 let computerPick = getRandomItem();
                 let result = "";
@@ -111,18 +151,28 @@
 
                 localStorage.setItem("storedScore", scoreString);
                 
-                
+                document.querySelector(".js-picks").innerHTML = `Your pick: ${yourPick} \nComputer pick: ${computerPick}`;
+                document.querySelector(".js-result").innerHTML = result;
+                document.querySelector(".js-score").innerHTML = `Wins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`;
 
-                return alert(`Your pick: ${yourPick} \nComputer pick: ${computerPick} \n ${result} \n\nWins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`)
+                //return alert(`Your pick: ${yourPick} \nComputer pick: ${computerPick} \n ${result} \n\nWins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`)
 
             };
 
-            function resetScore() {
+            function resetMessage() {
+                document.querySelector(".js-picks").innerHTML = "";
+                document.querySelector(".js-result").innerHTML = "Your score has been re-set!";
+                document.querySelector(".js-score").innerHTML = "Wins: 0, Losses: 0, Ties: 0";
+            }
+ 
+            // resetScore() - NO LONGER IN USE, replaced by memory reset
+            function resetScore() { 
+
                 for (let key in score) {
                     score[key] = 0
                 }
-
-                return alert(`Your score has been re-set!\nWins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`)
+            
+                //return alert(`Your score has been re-set!\nWins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`)
             }
             
         
