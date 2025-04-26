@@ -58,9 +58,12 @@
 
             <div class="reset-div">
                 <button onclick="
-                    /* resetScore()   */
-                    localStorage.removeItem('storedScore')   
-                    resetMessage()
+                    /* resetScoreOld()   */ 
+                    
+                    score.win = 0;
+                    score.loose = 0;
+                    score.tie = 0;
+                    resetScore()
                 ">
                     Reset the score
                 </button>
@@ -69,7 +72,7 @@
             <div class = "message-div">
                 <p class = "js-picks"></p>
                 <p class = "js-result"></p>
-                <p class = "js-score">Wins: 0, Losses: 0, Ties: 0</p>
+                <p class = "js-score"></p>
             </div>
         </div>
 
@@ -83,19 +86,22 @@
                 tie: 0
             }*/
 
-            function getRandomItem() {
-                const arr = ["Rock", "Paper", "Scissors"];
-                let index = Math.floor(Math.random() * arr.length);
-                return arr[index]
-            };
-            
-            function comparePicks(yourPick) {
-                let score = JSON.parse(localStorage.getItem("storedScore")) || {
+            let score = JSON.parse(localStorage.getItem("storedScore")) || {
                             win: 0,
                             loose: 0,
                             tie: 0
                         }
 
+            document.querySelector(".js-score").innerHTML = `Wins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`;            
+            
+            function comparePicks(yourPick) {
+
+                function getRandomItem() {
+                    const arr = ["Rock", "Paper", "Scissors"];
+                    let index = Math.floor(Math.random() * arr.length);
+                    return arr[index]
+                };
+                
                 let computerPick = getRandomItem();
                 let result = "";
 
@@ -159,14 +165,16 @@
 
             };
 
-            function resetMessage() {
+            function resetScore() {
+                localStorage.removeItem('storedScore'); 
+
                 document.querySelector(".js-picks").innerHTML = "";
                 document.querySelector(".js-result").innerHTML = "Your score has been re-set!";
-                document.querySelector(".js-score").innerHTML = "Wins: 0, Losses: 0, Ties: 0";
+                document.querySelector(".js-score").innerHTML = `Wins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`;
             }
  
-            // resetScore() - NO LONGER IN USE, replaced by memory reset
-            function resetScore() { 
+            // resetScoreOld() NO LONGER IN USE, replaced by memory reset
+            function resetScoreOld() { 
 
                 for (let key in score) {
                     score[key] = 0
