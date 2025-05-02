@@ -10,9 +10,37 @@
             body {
                 font-size: 1.5em;
                 padding: 2%;
+                background-color: black;
+                color: white;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
             }
 
-            button {
+            div {
+                margin-bottom: 50px;
+            }
+
+            a {
+                color:  grey;
+            }
+            a:hover{
+                color: white;
+            }
+            .buttons-div button {
+                border-radius: 100%;
+                padding: 30px;
+                border-style: none;
+                border: white 3px solid;
+                background-color: transparent;
+                cursor: pointer;
+            }
+
+            img {
+                width: 60px;
+                background-color: transparent;
+            }
+
+            /*button {
                 width: 150px;
                 height: 60px;
 
@@ -26,7 +54,22 @@
             .game-div {
                 display: flex column;
                 width: 470px;
+            } */
+
+            .result-icon {
+                width: 40px;
             }
+
+            .reset-div button {
+                padding: 10px;
+                width: 300px;
+            }
+
+            .result {
+                font-weight: bold;
+                font-size: 1.25em;
+            }
+
         </style>
 
 
@@ -40,40 +83,41 @@
                 <button onclick="     
                     comparePicks('Rock');  
                 ">
-                    Rock
+                    <img src="rock-emoji.png">
                 </button>
 
                 <button onclick="
                     comparePicks('Paper')
                 ">
-                    Paper
+                    <img src="paper-emoji.png">
                 </button>
 
-                <button onclick="
+                <button class = "scissors" onclick="
                     comparePicks('Scissors')
                 ">
-                    Scissors
+                    <img src="scissors-emoji.png">  
                 </button>
             </div>
 
-            <div class="reset-div">
-                <button onclick="
-                    /* resetScoreOld()   */ 
-                    
-                    score.win = 0;
-                    score.loose = 0;
-                    score.tie = 0;
-                    resetScore()
-                ">
-                    Reset the score
-                </button>
-            </div>
 
             <div class = "message-div">
                 <p class = "js-picks"></p>
-                <p class = "js-result"></p>
+                <p class = "js-result result"></p>
                 <p class = "js-score"></p>
             </div>
+        </div>
+
+        <div class="reset-div">
+            <button onclick="
+                /* resetScoreOld()   */ 
+                
+                score.win = 0;
+                score.loose = 0;
+                score.tie = 0;
+                resetScore()
+            ">
+                Reset the score
+            </button>
         </div>
 
         
@@ -153,11 +197,14 @@
 
                 }
 
+        
+
                 let scoreString = JSON.stringify(score);
 
                 localStorage.setItem("storedScore", scoreString);
                 
-                document.querySelector(".js-picks").innerHTML = `Your pick: ${yourPick} \nComputer pick: ${computerPick}`;
+                document.querySelector(".js-picks").innerHTML = `You: <img class="result-icon"src=\"${yourPick}-emoji.png\">, Computer: <img class="result-icon" src=\"${yourPick}-emoji.png\">`
+                 /* `You: ${yourPick} \nComputer pick: ${computerPick}`;*/
                 document.querySelector(".js-result").innerHTML = result;
                 document.querySelector(".js-score").innerHTML = `Wins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`;
 
@@ -169,7 +216,7 @@
                 localStorage.removeItem('storedScore'); 
 
                 document.querySelector(".js-picks").innerHTML = "";
-                document.querySelector(".js-result").innerHTML = "Your score has been re-set!";
+                document.querySelector(".js-result").innerHTML = "Your score has been re-set.";
                 document.querySelector(".js-score").innerHTML = `Wins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`;
             }
  
