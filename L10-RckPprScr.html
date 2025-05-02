@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <!---
+        use alert(`You've picked ${yourPick}, you ${resultMessage})
+        -->
+
+        <link rel="stylesheet" href="L10-RckPprScr.css">
+
+
+        <h6><a href="6-DOM_Selection_Page.html">Back</a></h6>
+
+
+        <h3>Rock Paper Scissors</h3>
+
+        <div class = "game-div">
+            <div class = "buttons-div">
+                <button onclick="     
+                    comparePicks('Rock');  
+                ">
+                    <img src="images/rock-emoji.png">
+                </button>
+
+                <button onclick="
+                    comparePicks('Paper')
+                ">
+                    <img src="images/paper-emoji.png">
+                </button>
+
+                <button class = "scissors" onclick="
+                    comparePicks('Scissors')
+                ">
+                    <img src="images/scissors-emoji.png">  
+                </button>
+            </div>
+
+
+            <div class = "message-div">
+                <p class = "js-picks"></p>
+                <p class = "js-result result"></p>
+                <p class = "js-score"></p>
+            </div>
+        </div>
+
+        <div class="reset-div">
+            <button onclick="
+                /* resetScoreOld()   */ 
+                
+                score.win = 0;
+                score.loose = 0;
+                score.tie = 0;
+                resetScore()
+            ">
+                Reset the score
+            </button>
+        </div>
+
+        
+
+
+        <script src="L10-RckPprScr.js"></script>
+            
+        
+    </body>
+
+
+</html>
