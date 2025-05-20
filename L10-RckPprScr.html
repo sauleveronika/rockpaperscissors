@@ -16,21 +16,15 @@
 
         <div class = "game-div">
             <div class = "buttons-div">
-                <button onclick="     
-                    comparePicks('Rock');  
-                ">
+                <button class="js-pick-rock">
                     <img src="images/rock-emoji.png">
                 </button>
 
-                <button onclick="
-                    comparePicks('Paper')
-                ">
+                <button class = "js-pick-paper">
                     <img src="images/paper-emoji.png">
                 </button>
 
-                <button class = "scissors" onclick="
-                    comparePicks('Scissors')
-                ">
+                <button class = "scissors js-pick-scissors">
                     <img src="images/scissors-emoji.png">  
                 </button>
             </div>
@@ -44,14 +38,7 @@
         </div>
 
         <div class="reset-div">
-            <button onclick="
-                /* resetScoreOld()   */ 
-                
-                score.win = 0;
-                score.loose = 0;
-                score.tie = 0;
-                resetScore()
-            ">
+            <button class = "js-reset-button">
                 Reset the score
             </button>
         </div>
