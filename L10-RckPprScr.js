@@ -3,6 +3,7 @@
                 loose: 0,
                 tie: 0
             }*/
+           
 
             let score = JSON.parse(localStorage.getItem("storedScore")) || {
                             win: 0,
@@ -103,3 +104,21 @@
             
                 //return alert(`Your score has been re-set!\nWins: ${score.win}, Loses: ${score.loose}, Ties: ${score.tie}`)
             }
+
+            const rockButton = document.querySelector(".js-pick-rock");
+            rockButton.addEventListener("click", ()=>{comparePicks('Rock'); });
+
+            const paperButton = document.querySelector(".js-pick-paper");
+            paperButton.addEventListener("click", ()=>{comparePicks('Paper'); });
+
+            const scissorsButton = document.querySelector(".js-pick-scissors");
+            scissorsButton.addEventListener("click", ()=>{comparePicks('Scissors'); });
+
+            const resetButton = document.querySelector(".js-reset-button");
+            resetButton.addEventListener("click", () => {                
+                score.win = 0;
+                score.loose = 0;
+                score.tie = 0;
+                resetScore()
+            })
+
